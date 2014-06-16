@@ -136,6 +136,8 @@ typedef NS_ENUM(NSInteger, TPPlayFlow) {
     
     self.cardKind.hidden = YES;
     self.scrollView.hidden = YES;
+    
+    [[[TPProbabilityManager alloc] init] startCalculator];
 }
 
 - (BOOL)isSelectedCard:(NSString *)title

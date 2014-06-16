@@ -7,22 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TPCardParseManager.h"
 
-typedef NS_ENUM(NSInteger, TPCardType) {
-    TPCardType_spade = 0,    // 黑桃
-    TPCardType_heart = 1,    // 红桃
-    TPCardType_club = 2,     // 梅花
-    TPCardType_diamond = 3,  // 方块
-};
 
-@interface TPCard : NSObject
-
-// 是否已读
-@property (nonatomic, assign) TPCardType cardType;
-// 是否已申请
-@property (nonatomic, assign) BOOL cardValue;  // 1-13
-
-@end
 
 @interface TPProbabilityManager : NSObject
 
@@ -45,6 +32,8 @@ typedef NS_ENUM(NSInteger, TPCardType) {
 
 @property (nonatomic, strong) TPCard *closeCard1;
 @property (nonatomic, strong) TPCard *closeCard2;
+
++ (instancetype)sharedInstance;
 
 - (void)startCalculator;
 
