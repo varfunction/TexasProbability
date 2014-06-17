@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A398DF3194FDC3100D48F8A /* Poker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A398DF2194FDC3100D48F8A /* Poker.m */; };
 		C6C55576194F0E7C00552A27 /* TPCardParseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C55575194F0E7C00552A27 /* TPCardParseManager.m */; };
 		C6FC92DA1945A21F00497983 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6FC92D91945A21F00497983 /* Foundation.framework */; };
 		C6FC92DC1945A21F00497983 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6FC92DB1945A21F00497983 /* CoreGraphics.framework */; };
@@ -37,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A398DF1194FDC3100D48F8A /* Poker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Poker.h; sourceTree = "<group>"; };
+		3A398DF2194FDC3100D48F8A /* Poker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Poker.m; sourceTree = "<group>"; };
 		C6C55574194F0E7C00552A27 /* TPCardParseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPCardParseManager.h; sourceTree = "<group>"; };
 		C6C55575194F0E7C00552A27 /* TPCardParseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPCardParseManager.m; sourceTree = "<group>"; };
 		C6FC92D61945A21F00497983 /* TexasProbability.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TexasProbability.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +91,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A398DF0194FDC3100D48F8A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3A398DF1194FDC3100D48F8A /* Poker.h */,
+				3A398DF2194FDC3100D48F8A /* Poker.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		C6FC92CD1945A21F00497983 = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +133,7 @@
 		C6FC92DF1945A21F00497983 /* TexasProbability */ = {
 			isa = PBXGroup;
 			children = (
+				3A398DF0194FDC3100D48F8A /* Models */,
 				C6FC92E81945A21F00497983 /* TPAppDelegate.h */,
 				C6FC92E91945A21F00497983 /* TPAppDelegate.m */,
 				C6FC92EB1945A21F00497983 /* Main.storyboard */,
@@ -266,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C6FC92F01945A21F00497983 /* TPViewController.m in Sources */,
+				3A398DF3194FDC3100D48F8A /* Poker.m in Sources */,
 				C6FC92EA1945A21F00497983 /* TPAppDelegate.m in Sources */,
 				C6FC93101945A35B00497983 /* AboutViewController.m in Sources */,
 				C6FC93151946FBD500497983 /* TPProbabilityManager.m in Sources */,

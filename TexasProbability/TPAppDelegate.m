@@ -7,12 +7,14 @@
 //
 
 #import "TPAppDelegate.h"
+#import "Poker.h"
 
 @implementation TPAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [[TestModel new] runTest];
     return YES;
 }
 							
