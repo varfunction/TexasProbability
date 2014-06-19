@@ -24,7 +24,7 @@
 
 - (void)startCalculator:(TPPlayFlow)flow firstTime:(BOOL)firstTime
 {
-    NSMutableArray *array = [NSMutableArray arrayWithArray:@[@1,@2,@3,@4,@5]];
+    NSArray *array = [self buildCardArrayWithout:nil];
     NSMutableArray *retArray = [NSMutableArray array];
     NSMutableArray *cretArray = [NSMutableArray array];
     NSLog(@"start111111");
@@ -32,7 +32,39 @@
     NSLog(@"%d",retArray.count);
 }
 
-- (void)combineData:(NSMutableArray *)srcArray
+- (NSArray *)buildCardArrayWithout:(NSArray *)selectedArray
+{
+    NSMutableArray *array = [NSMutableArray array];
+    for (int i = 0; i < 4; i++) {
+        TPCardType type = i;
+        for (int j = 0; j < 13; j++) {
+            int value = j;
+            TPCard *card = [[TPCard alloc] init];
+            card.cardType = type;
+            card.cardValue = value;
+            [array addObject:card];
+        }
+    }
+    
+    
+    NSMutableArray *removeArray = [NSMutableArray array];
+    for (TPCard *card in array) {
+        for (TPCard *selectedCard in selectedArray) {
+            if (card.cardType == selectedCard.cardType
+                && card.cardValue == selectedCard.cardValue) {
+                [removeArray addObject:card];
+            }
+        }
+    }
+    
+    for (TPCard *card in removeArray) {
+        [array removeObject:card];
+    }
+    
+    return array;
+}
+
+- (void)combineData:(NSArray *)srcArray
             toArray:(NSMutableArray *)retArray
                size:(int)size
               count:(int)count

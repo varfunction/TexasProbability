@@ -42,6 +42,28 @@
     return TPCardPower_HJ;
 }
 
+- (NSArray *)sortCard:(NSArray *)cardArray
+{
+    NSArray *sortedArray = [cardArray sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        if (![obj1 isKindOfClass:[TPCard class]] || ![obj2 isKindOfClass:[TPCard class]]) {
+            return NSOrderedSame;
+        }
+        
+        TPCard *card1 = (TPCard *)obj1;
+        TPCard *card2 = (TPCard *)obj2;
+        
+        if (card1.cardValue > card2.cardValue) {
+            return NSOrderedDescending;
+        } else if (card1.cardValue < card2.cardValue) {
+            return NSOrderedAscending;
+        } else {
+            return NSOrderedSame;
+        }
+    }];
+    
+    return sortedArray;
+}
+
 - (BOOL)hasTH:(NSArray *)cardArray
 {
     int spadeCount = 0;
@@ -70,6 +92,7 @@
     return spadeCount == size || heartCount == size || clubCount == size || diamondCount == size;
 }
 
+// 入参保证是从小到大排列的数组
 - (BOOL)hasSZ:(NSArray *)cardArray
 {
     for (int i = 1; i < cardArray.count; i++) {
