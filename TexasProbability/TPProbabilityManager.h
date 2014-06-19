@@ -24,17 +24,8 @@
 
 @property (nonatomic, assign) double WIN_PB;
 
-@property (nonatomic, strong) TPCard *openCard1;
-@property (nonatomic, strong) TPCard *openCard2;
-@property (nonatomic, strong) TPCard *openCard3;
-@property (nonatomic, strong) TPCard *openCard4;
-@property (nonatomic, strong) TPCard *openCard5;
-
-@property (nonatomic, strong) TPCard *closeCard1;
-@property (nonatomic, strong) TPCard *closeCard2;
-
 + (instancetype)sharedInstance;
 
-- (void)startCalculator;
+- (void)startCalculator:(TPPlayFlow)flow firstTime:(BOOL)firstTime;
 
 @end

@@ -14,7 +14,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    [[TestModel new] runTest];
+//    [[TestModel new] runTest];
     return YES;
 }
 							

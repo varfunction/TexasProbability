@@ -27,18 +27,38 @@ typedef NS_ENUM(NSInteger, TPCardPower) {
     TPCardPower_GP = 8,     // 高牌
 };
 
+
+typedef NS_ENUM(NSInteger, TPPlayFlow) {
+    TPPlayFlow_Nothing = 0,
+    TPPlayFlow_OpenHand = 1,    // 起手牌
+    TPPlayFlow_Flop = 2,        // 看盘圈
+    TPPlayFlow_Turn = 3,        // 转牌圈
+    TPPlayFlow_River = 4,       // 河牌圈
+};
+
 @interface TPCard : NSObject
 
 // 是否已读
 @property (nonatomic, assign) TPCardType cardType;
 // 是否已申请
-@property (nonatomic, assign) BOOL cardValue;  // 1-13
+@property (nonatomic, assign) int cardValue;  // 1-13
 
 @end
 
 @interface TPCardParseManager : NSObject
 
+@property (nonatomic, strong) TPCard *openCard_1;
+@property (nonatomic, strong) TPCard *openCard_2;
+@property (nonatomic, strong) TPCard *openCard_3;
+@property (nonatomic, strong) TPCard *openCard_4;
+@property (nonatomic, strong) TPCard *openCard_5;
+
+@property (nonatomic, strong) TPCard *closeCard_1;
+@property (nonatomic, strong) TPCard *closeCard_2;
+
 + (instancetype)sharedInstance;
+
+- (void)clearAllCard;
 
 - (TPCardPower)parseCard:(NSArray *)cardArray;
 

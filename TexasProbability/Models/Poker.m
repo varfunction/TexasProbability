@@ -197,8 +197,8 @@
 }
 
 
-#define OBJ_COUNT 6
-#define PK_COUNT 3
+#define OBJ_COUNT 52
+#define PK_COUNT 5
 - (void)runTest
 {
     NSLog(@"start = %ld",time(0));
@@ -214,9 +214,9 @@
     }
     NSArray *results = [[[PokerAL alloc] init] calCombineList:list combineCount:PK_COUNT];
     
-    for (NSArray *l in results) {
-        NSLog(@"l = %@", l);
-    }
+//    for (NSArray *l in results) {
+//        NSLog(@"l = %@", l);
+//    }
     
     NSLog(@"end = %ld",time(0));
     NSLog(@"resultNumber = %lu", (unsigned long)[results count]);

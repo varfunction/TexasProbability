@@ -8,14 +8,8 @@
 
 #import "TPViewController.h"
 #import "TPProbabilityManager.h"
+#import "TPCardParseManager.h"
 #import "AboutViewController.h"
-
-typedef NS_ENUM(NSInteger, TPPlayFlow) {
-    TPPlayFlow_OpenHand = 0,    // 起手牌
-    TPPlayFlow_Flop = 1,        // 看盘圈
-    TPPlayFlow_Turn = 2,        // 转牌圈
-    TPPlayFlow_River = 3,       // 河牌圈
-};
 
 @interface TPViewController ()
 @property (weak, nonatomic) IBOutlet UIView *resultView;
@@ -28,12 +22,17 @@ typedef NS_ENUM(NSInteger, TPPlayFlow) {
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *closedCardArray;
 @property (weak, nonatomic) IBOutlet UIButton *acceptBtn;
 @property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
+@property (weak, nonatomic) IBOutlet UIButton *openCard_1;
+@property (weak, nonatomic) IBOutlet UIButton *openCard_2;
+@property (weak, nonatomic) IBOutlet UIButton *openCard_3;
+@property (weak, nonatomic) IBOutlet UIButton *openCard_4;
+@property (weak, nonatomic) IBOutlet UIButton *openCard_5;
+@property (weak, nonatomic) IBOutlet UIButton *closeCard_1;
+@property (weak, nonatomic) IBOutlet UIButton *closeCard_2;
 
 @property (nonatomic, strong) AboutViewController *ab;
 
 @property (strong, nonatomic) UIButton *modifyCard;
-
-@property (assign, nonatomic) TPPlayFlow currentFlow;
 
 @end
 
@@ -46,8 +45,6 @@ typedef NS_ENUM(NSInteger, TPPlayFlow) {
     self.scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.cardValue.frame), CGRectGetHeight(self.scrollView.frame));
     CGColorRef borderColor = [[UIColor colorWithRed:78/255.0 green:51/255.0 blue:28/255.0 alpha:1] CGColor];
     
-    self.currentFlow = TPPlayFlow_OpenHand;
-    
     [self.resultView.layer setMasksToBounds:YES];
     [self.resultView.layer setCornerRadius:5.0]; //设置矩圆角半径
     [self.resultView.layer setBorderWidth:1.0];   //边框宽度
@@ -59,7 +56,7 @@ typedef NS_ENUM(NSInteger, TPPlayFlow) {
         [btn.layer setBorderWidth:1.0];   //边框宽度
         [btn.layer setBorderColor:borderColor];//边框颜色
         
-        [btn setTitle:@"?" forState:UIControlStateNormal];
+        [btn setTitle:CARD_TYPE_STR_INIT forState:UIControlStateNormal];
     }
     
     for (UIButton *btn in self.closedCardArray) {
@@ -68,7 +65,7 @@ typedef NS_ENUM(NSInteger, TPPlayFlow) {
         [btn.layer setBorderWidth:1.0];   //边框宽度
         [btn.layer setBorderColor:borderColor];//边框颜色
         
-        [btn setTitle:@"?" forState:UIControlStateNormal];
+        [btn setTitle:CARD_TYPE_STR_INIT forState:UIControlStateNormal];
     }
     
     self.cardKind.hidden = YES;
@@ -97,47 +94,49 @@ typedef NS_ENUM(NSInteger, TPPlayFlow) {
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)clickOpenCard:(UIButton *)sender {
-    self.cardKind.hidden = NO;
-    self.scrollView.hidden = NO;
-    self.modifyCard = sender;
-}
-
-- (IBAction)clickCloseCard:(UIButton *)sender {
+- (IBAction)touchCard:(UIButton *)sender {
     self.cardKind.hidden = NO;
     self.scrollView.hidden = NO;
     self.modifyCard = sender;
 }
 
 - (IBAction)clickAccept:(id)sender {
+    TPCardType type = [self getCardType:[self.cardKind titleForSegmentAtIndex:self.cardKind.selectedSegmentIndex]];
+    int value = [[self.cardValue titleForSegmentAtIndex:self.cardValue.selectedSegmentIndex] intValue];
     
     NSString *title = [NSString stringWithFormat:@"%@%@",
                        [self.cardKind titleForSegmentAtIndex:self.cardKind.selectedSegmentIndex],
                        [self.cardValue titleForSegmentAtIndex:self.cardValue.selectedSegmentIndex]];
 
     if (![self isSelectedCard:title]) {
+        // 没有被选过的牌
+        BOOL isFirstTimeSet = [[self.modifyCard titleForState:UIControlStateNormal] isEqualToString:CARD_TYPE_STR_INIT];
         [self.modifyCard setTitle:title forState:UIControlStateNormal];
         self.cardKind.hidden = YES;
         self.scrollView.hidden = YES;
-    }
-    
-    if ([self needStartCalculator]) {
         
+        [self saveCard:self.modifyCard withType:type value:value];
+        
+        TPPlayFlow flow = [self getCurrentPlayFlow];
+        if (flow != TPPlayFlow_Nothing) {
+            [[TPProbabilityManager sharedInstance] startCalculator:flow firstTime:isFirstTimeSet];
+        }
     }
 }
+
 - (IBAction)clickCancel:(id)sender {
     for (UIButton *btn in self.openCardArray) {
-        [btn setTitle:@"?" forState:UIControlStateNormal];
+        [btn setTitle:CARD_TYPE_STR_INIT forState:UIControlStateNormal];
     }
     
     for (UIButton *btn in self.closedCardArray) {
-        [btn setTitle:@"?" forState:UIControlStateNormal];
+        [btn setTitle:CARD_TYPE_STR_INIT forState:UIControlStateNormal];
     }
     
     self.cardKind.hidden = YES;
     self.scrollView.hidden = YES;
     
-    [[[TPProbabilityManager alloc] init] startCalculator];
+    [[TPCardParseManager sharedInstance] clearAllCard];
 }
 
 - (BOOL)isSelectedCard:(NSString *)title
@@ -157,16 +156,83 @@ typedef NS_ENUM(NSInteger, TPPlayFlow) {
     return NO;
 }
 
-- (BOOL)needStartCalculator
+- (void)saveCard:(UIButton *)btn
+        withType:(TPCardType)type
+           value:(int)value
 {
-    for (UIButton *btn in self.openCardArray) {
-        
+    TPCard *card = [[TPCard alloc] init];
+    card.cardType = type;
+    card.cardValue = value;
+    if (btn == self.closeCard_1) {
+        [TPCardParseManager sharedInstance].closeCard_1 = card;
+    } else if (btn == self.closeCard_1) {
+        [TPCardParseManager sharedInstance].closeCard_2 = card;
+    } else if (btn == self.openCard_1) {
+        [TPCardParseManager sharedInstance].openCard_1 = card;
+    } else if (btn == self.openCard_2) {
+        [TPCardParseManager sharedInstance].openCard_2 = card;
+    } else if (btn == self.openCard_3) {
+        [TPCardParseManager sharedInstance].openCard_3 = card;
+    } else if (btn == self.openCard_4) {
+        [TPCardParseManager sharedInstance].openCard_4 = card;
+    } else if (btn == self.openCard_5) {
+        [TPCardParseManager sharedInstance].openCard_5 = card;
+    } else {
+        NSLog(@"er...");
     }
-    
-    for (UIButton *btn in self.closedCardArray) {
-        
+}
+
+- (TPCardType)getCardType:(NSString *)typeStr
+{
+    TPCardType type;
+    if ([typeStr isEqualToString:CARD_TYPE_STR_SPADE]) {
+        type = TPCardType_spade;
+    } else if ([typeStr isEqualToString:CARD_TYPE_STR_HEART]) {
+        type = TPCardType_heart;
+    } else if ([typeStr isEqualToString:CARD_TYPE_STR_CLUB]) {
+        type = TPCardType_club;
+    } else {
+        type = TPCardType_diamond;
     }
-    return NO;
+    return type;
+}
+
+- (TPPlayFlow)getCurrentPlayFlow
+{
+    if ([self HasRiverValue] && [self HasTurnValue] && [self HasFlopValue] && [self HasOpenHandValue]) {
+        return TPPlayFlow_River;
+    } else if ([self HasTurnValue] && [self HasFlopValue] && [self HasOpenHandValue]) {
+        return TPPlayFlow_Turn;
+    } else if ([self HasFlopValue] && [self HasOpenHandValue]) {
+        return TPPlayFlow_Flop;
+    } else if ([self HasOpenHandValue]) {
+        return TPPlayFlow_OpenHand;
+    } else {
+        return TPPlayFlow_Nothing;
+    }
+}
+
+- (BOOL)HasRiverValue
+{
+    return ![[self.openCard_5 titleForState:UIControlStateNormal] isEqualToString:CARD_TYPE_STR_INIT];
+}
+
+- (BOOL)HasTurnValue
+{
+    return ![[self.openCard_4 titleForState:UIControlStateNormal] isEqualToString:CARD_TYPE_STR_INIT];
+}
+
+- (BOOL)HasFlopValue
+{
+    return ![[self.openCard_3 titleForState:UIControlStateNormal] isEqualToString:CARD_TYPE_STR_INIT]
+        && ![[self.openCard_2 titleForState:UIControlStateNormal] isEqualToString:CARD_TYPE_STR_INIT]
+        && ![[self.openCard_1 titleForState:UIControlStateNormal] isEqualToString:CARD_TYPE_STR_INIT];
+}
+
+- (BOOL)HasOpenHandValue
+{
+    return ![[self.closeCard_1 titleForState:UIControlStateNormal] isEqualToString:CARD_TYPE_STR_INIT]
+        && ![[self.closeCard_2 titleForState:UIControlStateNormal] isEqualToString:CARD_TYPE_STR_INIT];
 }
 
 @end

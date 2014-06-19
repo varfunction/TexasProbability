@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+#define CARD_TYPE_STR_SPADE @"♠"
+#define CARD_TYPE_STR_HEART @"♥"
+#define CARD_TYPE_STR_CLUB @"♣"
+#define CARD_TYPE_STR_DIAMOND @"♦"
+#define CARD_TYPE_STR_INIT @"?"
+#define CARD_TYPE_STR_HIDE @"X"
+
+
 @interface TPViewController : UIViewController
 
 @end

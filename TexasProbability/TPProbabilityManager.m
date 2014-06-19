@@ -22,12 +22,13 @@
 	return instance;
 }
 
-- (void)startCalculator
+- (void)startCalculator:(TPPlayFlow)flow firstTime:(BOOL)firstTime
 {
-    NSMutableArray *array = [NSMutableArray arrayWithArray:@[@1,@2,@3,@4,@5,@6,@2,@3,@4,@5,@6,@2,@3,@4,@5,@6,@2,@3,@4,@5,@6,@2,@3,@4,@5,@6,@2,@3,@4,@5,@6,@2,@3,@4,@5,@6,@2,@3,@4,@5,@6,@2,@3,@4,@5,@6,@2,@3,@4,@5]];
+    NSMutableArray *array = [NSMutableArray arrayWithArray:@[@1,@2,@3,@4,@5]];
     NSMutableArray *retArray = [NSMutableArray array];
     NSMutableArray *cretArray = [NSMutableArray array];
-    [self combineData:array toArray:retArray size:array.count count:5 startIndex:0 combineRet:cretArray];
+    NSLog(@"start111111");
+    [self combineData:array toArray:retArray size:array.count count:2 startIndex:0 combineRet:cretArray];
     NSLog(@"%d",retArray.count);
 }
 

@@ -64,7 +64,7 @@
                                     <color key="titleColor" red="0.30588235289999999" green="0.20000000000000001" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="clickOpenCard:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="fBK-S8-f1b"/>
+                                    <action selector="touchCard:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="6wm-ts-RlI"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Fmc-nK-WvM">
@@ -75,7 +75,7 @@
                                     <color key="titleShadowColor" red="0.30588235289999999" green="0.20000000000000001" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="clickOpenCard:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="iZn-X2-EaS"/>
+                                    <action selector="touchCard:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="bEf-1s-HEZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="oll-Yk-sSD">
@@ -86,7 +86,7 @@
                                     <color key="titleShadowColor" red="0.30588235289999999" green="0.20000000000000001" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="clickOpenCard:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="1Gl-bi-IQT"/>
+                                    <action selector="touchCard:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="MSN-R1-QZ7"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="XsQ-nV-uLp">
@@ -97,7 +97,7 @@
                                     <color key="titleShadowColor" red="0.30588235289999999" green="0.20000000000000001" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="clickOpenCard:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="A3V-xl-re7"/>
+                                    <action selector="touchCard:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="si1-uE-Z0J"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="og5-rr-k7P">
@@ -108,7 +108,7 @@
                                     <color key="titleShadowColor" red="0.30588235289999999" green="0.20000000000000001" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="clickOpenCard:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="61P-ze-tl9"/>
+                                    <action selector="touchCard:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="uq8-rX-g7L"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="YEh-98-mMS">
@@ -119,7 +119,7 @@
                                     <color key="titleShadowColor" red="0.30588235289999999" green="0.20000000000000001" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="clickCloseCard:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="R8i-2g-Idk"/>
+                                    <action selector="touchCard:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="5aY-ok-7WY"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DAM-uT-6Ut">
@@ -130,7 +130,7 @@
                                     <color key="titleShadowColor" red="0.30588235289999999" green="0.20000000000000001" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="clickCloseCard:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="NFO-H7-laJ"/>
+                                    <action selector="touchCard:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ktE-e6-7Q6"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Lx6-tf-7H9">
@@ -162,6 +162,13 @@
                         <outlet property="cancelBtn" destination="Lx6-tf-7H9" id="Xd2-ff-IcB"/>
                         <outlet property="cardKind" destination="qtm-09-H0p" id="Q9E-m3-grU"/>
                         <outlet property="cardValue" destination="dpx-cS-ocD" id="KXI-4e-Kyj"/>
+                        <outlet property="closeCard_1" destination="YEh-98-mMS" id="Bh4-O6-sOp"/>
+                        <outlet property="closeCard_2" destination="DAM-uT-6Ut" id="ggP-1i-iTK"/>
+                        <outlet property="openCard_1" destination="XgZ-Kt-mYh" id="b9w-KW-JWi"/>
+                        <outlet property="openCard_2" destination="Fmc-nK-WvM" id="YmC-V6-718"/>
+                        <outlet property="openCard_3" destination="oll-Yk-sSD" id="JBc-QY-L5J"/>
+                        <outlet property="openCard_4" destination="XsQ-nV-uLp" id="d8X-Sw-qDN"/>
+                        <outlet property="openCard_5" destination="og5-rr-k7P" id="gAq-Uc-x1I"/>
                         <outlet property="resultView" destination="ME1-Fz-mU1" id="ZsS-DS-lZk"/>
                         <outlet property="scrollView" destination="qTw-IK-LJZ" id="vqh-Pd-Nzz"/>
                         <outletCollection property="openCardArray" destination="XgZ-Kt-mYh" id="wTF-ft-9o4"/>

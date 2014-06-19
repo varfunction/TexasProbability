@@ -8,6 +8,10 @@
 
 #import "TPCardParseManager.h"
 
+@implementation TPCard : NSObject
+
+@end
+
 @implementation TPCardParseManager
 
 + (instancetype)sharedInstance
@@ -20,6 +24,17 @@
     });
     
 	return instance;
+}
+
+- (void)clearAllCard
+{
+    self.closeCard_1 = nil;
+    self.closeCard_2 = nil;
+    self.openCard_1 = nil;
+    self.openCard_2 = nil;
+    self.openCard_3 = nil;
+    self.openCard_4 = nil;
+    self.openCard_5 = nil;
 }
 
 - (TPCardPower)parseCard:(NSArray *)cardArray
@@ -57,7 +72,14 @@
 
 - (BOOL)hasSZ:(NSArray *)cardArray
 {
-    return NO;
+    for (int i = 1; i < cardArray.count; i++) {
+        int currentValue = [(TPCard *)cardArray[i] cardValue];
+        int prevValue = [(TPCard *)cardArray[i-1] cardValue];
+        if (currentValue - prevValue != 1) {
+            return NO;
+        }
+    }
+    return YES;
 }
 
 @end
