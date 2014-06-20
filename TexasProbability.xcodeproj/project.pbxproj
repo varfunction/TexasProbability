@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3A398DF3194FDC3100D48F8A /* Poker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A398DF2194FDC3100D48F8A /* Poker.m */; };
-		C6C55576194F0E7C00552A27 /* TPCardParseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C55575194F0E7C00552A27 /* TPCardParseManager.m */; };
 		C6FC92DA1945A21F00497983 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6FC92D91945A21F00497983 /* Foundation.framework */; };
 		C6FC92DC1945A21F00497983 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6FC92DB1945A21F00497983 /* CoreGraphics.framework */; };
 		C6FC92DE1945A21F00497983 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6FC92DD1945A21F00497983 /* UIKit.framework */; };
@@ -16,15 +15,16 @@
 		C6FC92E61945A21F00497983 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FC92E51945A21F00497983 /* main.m */; };
 		C6FC92EA1945A21F00497983 /* TPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FC92E91945A21F00497983 /* TPAppDelegate.m */; };
 		C6FC92ED1945A21F00497983 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6FC92EB1945A21F00497983 /* Main.storyboard */; };
-		C6FC92F01945A21F00497983 /* TPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FC92EF1945A21F00497983 /* TPViewController.m */; };
 		C6FC92F21945A21F00497983 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6FC92F11945A21F00497983 /* Images.xcassets */; };
 		C6FC92F91945A22000497983 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6FC92F81945A22000497983 /* XCTest.framework */; };
 		C6FC92FA1945A22000497983 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6FC92D91945A21F00497983 /* Foundation.framework */; };
 		C6FC92FB1945A22000497983 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6FC92DD1945A21F00497983 /* UIKit.framework */; };
 		C6FC93031945A22000497983 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C6FC93011945A22000497983 /* InfoPlist.strings */; };
 		C6FC93051945A22000497983 /* TexasProbabilityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FC93041945A22000497983 /* TexasProbabilityTests.m */; };
-		C6FC93101945A35B00497983 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FC930F1945A35B00497983 /* AboutViewController.m */; };
-		C6FC93151946FBD500497983 /* TPProbabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FC93141946FBD500497983 /* TPProbabilityManager.m */; };
+		C6FEC93F1953D83400D3AB00 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FEC93C1953D83400D3AB00 /* AboutViewController.m */; };
+		C6FEC9401953D83400D3AB00 /* TPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FEC93E1953D83400D3AB00 /* TPViewController.m */; };
+		C6FEC94B1953D85E00D3AB00 /* TPCardParseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FEC9481953D85E00D3AB00 /* TPCardParseManager.m */; };
+		C6FEC94C1953D85E00D3AB00 /* TPProbabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FEC94A1953D85E00D3AB00 /* TPProbabilityManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,8 +40,6 @@
 /* Begin PBXFileReference section */
 		3A398DF1194FDC3100D48F8A /* Poker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Poker.h; sourceTree = "<group>"; };
 		3A398DF2194FDC3100D48F8A /* Poker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Poker.m; sourceTree = "<group>"; };
-		C6C55574194F0E7C00552A27 /* TPCardParseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPCardParseManager.h; sourceTree = "<group>"; };
-		C6C55575194F0E7C00552A27 /* TPCardParseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPCardParseManager.m; sourceTree = "<group>"; };
 		C6FC92D61945A21F00497983 /* TexasProbability.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TexasProbability.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6FC92D91945A21F00497983 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C6FC92DB1945A21F00497983 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -53,18 +51,20 @@
 		C6FC92E81945A21F00497983 /* TPAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TPAppDelegate.h; sourceTree = "<group>"; };
 		C6FC92E91945A21F00497983 /* TPAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPAppDelegate.m; sourceTree = "<group>"; };
 		C6FC92EC1945A21F00497983 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		C6FC92EE1945A21F00497983 /* TPViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TPViewController.h; sourceTree = "<group>"; };
-		C6FC92EF1945A21F00497983 /* TPViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPViewController.m; sourceTree = "<group>"; };
 		C6FC92F11945A21F00497983 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C6FC92F71945A22000497983 /* TexasProbabilityTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TexasProbabilityTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6FC92F81945A22000497983 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		C6FC93001945A22000497983 /* TexasProbabilityTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TexasProbabilityTests-Info.plist"; sourceTree = "<group>"; };
 		C6FC93021945A22000497983 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C6FC93041945A22000497983 /* TexasProbabilityTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TexasProbabilityTests.m; sourceTree = "<group>"; };
-		C6FC930E1945A35B00497983 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
-		C6FC930F1945A35B00497983 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
-		C6FC93131946FBD500497983 /* TPProbabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPProbabilityManager.h; sourceTree = "<group>"; };
-		C6FC93141946FBD500497983 /* TPProbabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPProbabilityManager.m; sourceTree = "<group>"; };
+		C6FEC93B1953D83400D3AB00 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		C6FEC93C1953D83400D3AB00 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		C6FEC93D1953D83400D3AB00 /* TPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPViewController.h; sourceTree = "<group>"; };
+		C6FEC93E1953D83400D3AB00 /* TPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPViewController.m; sourceTree = "<group>"; };
+		C6FEC9471953D85E00D3AB00 /* TPCardParseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPCardParseManager.h; sourceTree = "<group>"; };
+		C6FEC9481953D85E00D3AB00 /* TPCardParseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPCardParseManager.m; sourceTree = "<group>"; };
+		C6FEC9491953D85E00D3AB00 /* TPProbabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPProbabilityManager.h; sourceTree = "<group>"; };
+		C6FEC94A1953D85E00D3AB00 /* TPProbabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPProbabilityManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +94,10 @@
 		3A398DF0194FDC3100D48F8A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C6FEC9471953D85E00D3AB00 /* TPCardParseManager.h */,
+				C6FEC9481953D85E00D3AB00 /* TPCardParseManager.m */,
+				C6FEC9491953D85E00D3AB00 /* TPProbabilityManager.h */,
+				C6FEC94A1953D85E00D3AB00 /* TPProbabilityManager.m */,
 				3A398DF1194FDC3100D48F8A /* Poker.h */,
 				3A398DF2194FDC3100D48F8A /* Poker.m */,
 			);
@@ -133,18 +137,12 @@
 		C6FC92DF1945A21F00497983 /* TexasProbability */ = {
 			isa = PBXGroup;
 			children = (
+				C6FEC9391953D7AB00D3AB00 /* Controllers */,
+				C6FEC93A1953D7AB00D3AB00 /* Views */,
 				3A398DF0194FDC3100D48F8A /* Models */,
 				C6FC92E81945A21F00497983 /* TPAppDelegate.h */,
 				C6FC92E91945A21F00497983 /* TPAppDelegate.m */,
 				C6FC92EB1945A21F00497983 /* Main.storyboard */,
-				C6FC92EE1945A21F00497983 /* TPViewController.h */,
-				C6FC92EF1945A21F00497983 /* TPViewController.m */,
-				C6FC930E1945A35B00497983 /* AboutViewController.h */,
-				C6FC930F1945A35B00497983 /* AboutViewController.m */,
-				C6FC93131946FBD500497983 /* TPProbabilityManager.h */,
-				C6FC93141946FBD500497983 /* TPProbabilityManager.m */,
-				C6C55574194F0E7C00552A27 /* TPCardParseManager.h */,
-				C6C55575194F0E7C00552A27 /* TPCardParseManager.m */,
 				C6FC92F11945A21F00497983 /* Images.xcassets */,
 				C6FC92E01945A21F00497983 /* Supporting Files */,
 			);
@@ -178,6 +176,24 @@
 				C6FC93011945A22000497983 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C6FEC9391953D7AB00D3AB00 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C6FEC93B1953D83400D3AB00 /* AboutViewController.h */,
+				C6FEC93C1953D83400D3AB00 /* AboutViewController.m */,
+				C6FEC93D1953D83400D3AB00 /* TPViewController.h */,
+				C6FEC93E1953D83400D3AB00 /* TPViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		C6FEC93A1953D7AB00D3AB00 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,13 +294,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6FC92F01945A21F00497983 /* TPViewController.m in Sources */,
 				3A398DF3194FDC3100D48F8A /* Poker.m in Sources */,
+				C6FEC9401953D83400D3AB00 /* TPViewController.m in Sources */,
 				C6FC92EA1945A21F00497983 /* TPAppDelegate.m in Sources */,
-				C6FC93101945A35B00497983 /* AboutViewController.m in Sources */,
-				C6FC93151946FBD500497983 /* TPProbabilityManager.m in Sources */,
+				C6FEC93F1953D83400D3AB00 /* AboutViewController.m in Sources */,
+				C6FEC94C1953D85E00D3AB00 /* TPProbabilityManager.m in Sources */,
 				C6FC92E61945A21F00497983 /* main.m in Sources */,
-				C6C55576194F0E7C00552A27 /* TPCardParseManager.m in Sources */,
+				C6FEC94B1953D85E00D3AB00 /* TPCardParseManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
