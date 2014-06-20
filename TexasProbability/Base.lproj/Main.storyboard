@@ -184,10 +184,10 @@
             </objects>
             <point key="canvasLocation" x="176" y="148"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Result Display Table View Controller-->
         <scene sceneID="bnR-nP-flp">
             <objects>
-                <tableViewController id="Hs6-2d-tUh" sceneMemberID="viewController">
+                <tableViewController id="Hs6-2d-tUh" customClass="TPResultDisplayTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="feq-E3-Se3">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="250"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -284,7 +284,7 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="高牌：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="On1-rP-CsR">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="单对：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="On1-rP-CsR">
                                                     <rect key="frame" x="160" y="14" width="120" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -326,6 +326,18 @@
                             <outlet property="delegate" destination="Hs6-2d-tUh" id="DTS-y3-8Xh"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="DDLabel" destination="On1-rP-CsR" id="5vG-fB-n4O"/>
+                        <outlet property="HJLabel" destination="SCe-wA-qbj" id="urn-vV-njF"/>
+                        <outlet property="HLLabel" destination="iep-Lb-vjR" id="Mpn-KG-GOV"/>
+                        <outlet property="JGLabel" destination="Yrj-na-paC" id="gRJ-Mx-FYw"/>
+                        <outlet property="LDLabel" destination="ubf-LM-WB3" id="N37-XX-jdG"/>
+                        <outlet property="STLabel" destination="zLG-TI-cyT" id="psS-CM-Rwq"/>
+                        <outlet property="SZLabel" destination="XAo-Qs-ch2" id="0RK-tK-M0w"/>
+                        <outlet property="THLabel" destination="slZ-uZ-Zqg" id="tTr-HL-Jb6"/>
+                        <outlet property="adviceLabel" destination="1dc-uV-f4a" id="KCB-fe-cci"/>
+                        <outlet property="winLabel" destination="T9a-8z-kXQ" id="jy7-jL-TKF"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3V0-Bf-U3g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

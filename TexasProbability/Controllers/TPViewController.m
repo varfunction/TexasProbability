@@ -41,6 +41,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
     self.ab = [AboutViewController instance];
     self.scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.cardValue.frame), CGRectGetHeight(self.scrollView.frame));
     CGColorRef borderColor = [[UIColor colorWithRed:78/255.0 green:51/255.0 blue:28/255.0 alpha:1] CGColor];
@@ -94,6 +96,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+
 - (IBAction)touchCard:(UIButton *)sender {
     self.cardKind.hidden = NO;
     self.scrollView.hidden = NO;
@@ -102,7 +105,7 @@
 
 - (IBAction)clickAccept:(id)sender {
     TPCardType type = [self getCardType:[self.cardKind titleForSegmentAtIndex:self.cardKind.selectedSegmentIndex]];
-    int value = [[self.cardValue titleForSegmentAtIndex:self.cardValue.selectedSegmentIndex] intValue];
+    int value = [self getCardValue:[self.cardValue titleForSegmentAtIndex:self.cardValue.selectedSegmentIndex]];
     
     NSString *title = [NSString stringWithFormat:@"%@%@",
                        [self.cardKind titleForSegmentAtIndex:self.cardKind.selectedSegmentIndex],
@@ -165,7 +168,7 @@
     card.cardValue = value;
     if (btn == self.closeCard_1) {
         [TPCardParseManager sharedInstance].closeCard_1 = card;
-    } else if (btn == self.closeCard_1) {
+    } else if (btn == self.closeCard_2) {
         [TPCardParseManager sharedInstance].closeCard_2 = card;
     } else if (btn == self.openCard_1) {
         [TPCardParseManager sharedInstance].openCard_1 = card;
@@ -195,6 +198,23 @@
         type = TPCardType_diamond;
     }
     return type;
+}
+
+- (int)getCardValue:(NSString *)valueStr
+{
+    int value = 0;
+    if ([valueStr isEqualToString:@"A"]) {
+        value = 1;
+    } else if ([valueStr isEqualToString:@"K"]) {
+        value = 13;
+    } else if ([valueStr isEqualToString:@"Q"]) {
+        value = 12;
+    } else if ([valueStr isEqualToString:@"J"]) {
+        value = 11;
+    } else {
+        value = [valueStr intValue];
+    }
+    return value;
 }
 
 - (TPPlayFlow)getCurrentPlayFlow

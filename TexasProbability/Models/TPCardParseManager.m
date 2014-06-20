@@ -39,7 +39,37 @@
 
 - (TPCardPower)parseCard:(NSArray *)cardArray
 {
-    return TPCardPower_HJ;
+    int power = 0;
+    NSArray *sortedCardArray = [self sortCard:cardArray];
+    
+    if ([self hasHJ:sortedCardArray]) {
+        power = power | TPCardPower_HJ;
+    }
+    if ([self hasJG:sortedCardArray]) {
+        power = power | TPCardPower_JG;
+    }
+    if ([self hasHL:sortedCardArray]) {
+        power = power | TPCardPower_HL;
+    }
+    if ([self hasTH:sortedCardArray]) {
+        power = power | TPCardPower_TH;
+    }
+    if ([self hasSZ:sortedCardArray]) {
+        power = power | TPCardPower_SZ;
+    }
+    if ([self hasST:sortedCardArray]) {
+        power = power | TPCardPower_ST;
+    }
+    if ([self hasLD:sortedCardArray]) {
+        power = power | TPCardPower_LD;
+    }
+    if ([self hasDD:sortedCardArray]) {
+        power = power | TPCardPower_DD;
+    }
+    if ([self hasGP:sortedCardArray]) {
+        power = power | TPCardPower_GP;
+    }
+    return power;
 }
 
 - (NSArray *)sortCard:(NSArray *)cardArray
@@ -64,8 +94,58 @@
     return sortedArray;
 }
 
+- (BOOL)hasHJ:(NSArray *)cardArray
+{
+    return [self hasTH:cardArray] && [self hasSZ:cardArray];
+}
+
+- (BOOL)hasJG:(NSArray *)cardArray
+{
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    for (TPCard *card in cardArray) {
+        NSString *cardKey = [NSString stringWithFormat:@"%d", card.cardValue];
+        int currentCount = [[dic objectForKey:cardKey] intValue];
+        [dic setObject:@(currentCount+1) forKey:cardKey];
+    }
+    
+    int JG_count = 0;
+    for (NSString *key in dic) {
+        NSNumber *count = [dic objectForKey:key];
+        if ([count intValue] >= 4) {
+            JG_count++;
+        }
+    }
+    
+    return JG_count >= 1;
+}
+
+- (BOOL)hasHL:(NSArray *)cardArray
+{
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    for (TPCard *card in cardArray) {
+        NSString *cardKey = [NSString stringWithFormat:@"%d", card.cardValue];
+        int currentCount = [[dic objectForKey:cardKey] intValue];
+        [dic setObject:@(currentCount+1) forKey:cardKey];
+    }
+    
+    int ST_count = 0;
+    int DD_count = 0;
+    for (NSString *key in dic) {
+        NSNumber *count = [dic objectForKey:key];
+        if ([count intValue] == 3) {
+            ST_count++;
+        }
+        if ([count intValue] == 2) {
+            DD_count++;
+        }
+    }
+    
+    return ST_count >= 1 && DD_count >= 1;
+}
+
 - (BOOL)hasTH:(NSArray *)cardArray
 {
+    assert(cardArray.count == 5);
     int spadeCount = 0;
     int heartCount = 0;
     int clubCount = 0;
@@ -89,20 +169,111 @@
         }
     }
     int size = cardArray.count;
-    return spadeCount == size || heartCount == size || clubCount == size || diamondCount == size;
+    BOOL hasTH = (spadeCount == size || heartCount == size || clubCount == size || diamondCount == size);
+    return hasTH;
 }
 
-// 入参保证是从小到大排列的数组
+// 入参保证是从小到大排列的数组,count == 5
 - (BOOL)hasSZ:(NSArray *)cardArray
 {
-    for (int i = 1; i < cardArray.count; i++) {
-        int currentValue = [(TPCard *)cardArray[i] cardValue];
-        int prevValue = [(TPCard *)cardArray[i-1] cardValue];
-        if (currentValue - prevValue != 1) {
-            return NO;
+    assert(cardArray.count == 5);
+    BOOL hasSZ = NO;
+    if ([(TPCard *)cardArray[0] cardValue] == 1) {
+        NSMutableArray *copyArray = [NSMutableArray arrayWithArray:[cardArray copy]];
+        TPCard *card_14 = [[TPCard alloc] init];
+        card_14.cardValue = 14;
+        [copyArray removeObjectAtIndex:0];
+        [copyArray addObject:card_14];
+        
+        int delta_1 = [(TPCard *)copyArray[1] cardValue] - [(TPCard *)copyArray[0] cardValue];
+        int delta_2 = [(TPCard *)copyArray[2] cardValue] - [(TPCard *)copyArray[1] cardValue];
+        int delta_3 = [(TPCard *)copyArray[3] cardValue] - [(TPCard *)copyArray[2] cardValue];
+        int delta_4 = [(TPCard *)copyArray[4] cardValue] - [(TPCard *)copyArray[3] cardValue];
+        
+        hasSZ = (delta_1 == delta_2
+                 && delta_2 == delta_3
+                 && delta_3 == delta_4
+                 && delta_1 == 1);
+    }
+    
+    if (!hasSZ) {
+        int delta_1 = [(TPCard *)cardArray[1] cardValue] - [(TPCard *)cardArray[0] cardValue];
+        int delta_2 = [(TPCard *)cardArray[2] cardValue] - [(TPCard *)cardArray[1] cardValue];
+        int delta_3 = [(TPCard *)cardArray[3] cardValue] - [(TPCard *)cardArray[2] cardValue];
+        int delta_4 = [(TPCard *)cardArray[4] cardValue] - [(TPCard *)cardArray[3] cardValue];
+        
+        hasSZ = (delta_1 == delta_2
+                 && delta_2 == delta_3
+                 && delta_3 == delta_4
+                 && delta_1 == 1);
+    }
+    
+    return hasSZ;
+}
+
+- (BOOL)hasST:(NSArray *)cardArray
+{
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    for (TPCard *card in cardArray) {
+        NSString *cardKey = [NSString stringWithFormat:@"%d", card.cardValue];
+        int currentCount = [[dic objectForKey:cardKey] intValue];
+        [dic setObject:@(currentCount+1) forKey:cardKey];
+    }
+    
+    int ST_count = 0;
+    for (NSString *key in dic) {
+        NSNumber *count = [dic objectForKey:key];
+        if ([count intValue] >= 3) {
+            ST_count++;
         }
     }
-    return YES;
+    
+    return ST_count >= 1;
+}
+
+- (BOOL)hasLD:(NSArray *)cardArray
+{
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    for (TPCard *card in cardArray) {
+        NSString *cardKey = [NSString stringWithFormat:@"%d", card.cardValue];
+        int currentCount = [[dic objectForKey:cardKey] intValue];
+        [dic setObject:@(currentCount+1) forKey:cardKey];
+    }
+    
+    int DD_count = 0;
+    for (NSString *key in dic) {
+        NSNumber *count = [dic objectForKey:key];
+        if ([count intValue] >= 2) {
+            DD_count++;
+        }
+    }
+    
+    return DD_count >= 2;
+}
+
+- (BOOL)hasDD:(NSArray *)cardArray
+{
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    for (TPCard *card in cardArray) {
+        NSString *cardKey = [NSString stringWithFormat:@"%d", card.cardValue];
+        int currentCount = [[dic objectForKey:cardKey] intValue];
+        [dic setObject:@(currentCount+1) forKey:cardKey];
+    }
+    
+    int DD_count = 0;
+    for (NSString *key in dic) {
+        NSNumber *count = [dic objectForKey:key];
+        if ([count intValue] >= 2) {
+            DD_count++;
+        }
+    }
+    
+    return DD_count >= 1;
+}
+
+- (BOOL)hasGP:(NSArray *)cardArray
+{
+    return cardArray.count == 5;
 }
 
 @end

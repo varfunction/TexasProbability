@@ -16,15 +16,15 @@ typedef NS_ENUM(NSInteger, TPCardType) {
 };
 
 typedef NS_ENUM(NSInteger, TPCardPower) {
-    TPCardPower_HJ = 0,     // 同花顺
-    TPCardPower_JG = 1,     // 金刚
-    TPCardPower_HL = 2,     // 葫芦
-    TPCardPower_TH = 3,     // 同花
-    TPCardPower_SZ = 4,     // 顺子
-    TPCardPower_ST = 5,     // 三条
-    TPCardPower_LD = 6,     // 两对
-    TPCardPower_DD = 7,     // 单对
-    TPCardPower_GP = 8,     // 高牌
+    TPCardPower_HJ = 1<<1,     // 同花顺
+    TPCardPower_JG = 1<<2,     // 金刚
+    TPCardPower_HL = 1<<3,     // 葫芦
+    TPCardPower_TH = 1<<4,     // 同花
+    TPCardPower_SZ = 1<<5,     // 顺子
+    TPCardPower_ST = 1<<6,     // 三条
+    TPCardPower_LD = 1<<7,     // 两对
+    TPCardPower_DD = 1<<8,     // 单对
+    TPCardPower_GP = 1<<9,     // 高牌
 };
 
 

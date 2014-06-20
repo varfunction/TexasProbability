@@ -25,6 +25,7 @@
 		C6FEC9401953D83400D3AB00 /* TPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FEC93E1953D83400D3AB00 /* TPViewController.m */; };
 		C6FEC94B1953D85E00D3AB00 /* TPCardParseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FEC9481953D85E00D3AB00 /* TPCardParseManager.m */; };
 		C6FEC94C1953D85E00D3AB00 /* TPProbabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FEC94A1953D85E00D3AB00 /* TPProbabilityManager.m */; };
+		C6FEC94F195435E800D3AB00 /* TPResultDisplayTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FEC94E195435E800D3AB00 /* TPResultDisplayTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,8 @@
 		C6FEC9481953D85E00D3AB00 /* TPCardParseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPCardParseManager.m; sourceTree = "<group>"; };
 		C6FEC9491953D85E00D3AB00 /* TPProbabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPProbabilityManager.h; sourceTree = "<group>"; };
 		C6FEC94A1953D85E00D3AB00 /* TPProbabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPProbabilityManager.m; sourceTree = "<group>"; };
+		C6FEC94D195435E800D3AB00 /* TPResultDisplayTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPResultDisplayTableViewController.h; sourceTree = "<group>"; };
+		C6FEC94E195435E800D3AB00 /* TPResultDisplayTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPResultDisplayTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +188,8 @@
 				C6FEC93C1953D83400D3AB00 /* AboutViewController.m */,
 				C6FEC93D1953D83400D3AB00 /* TPViewController.h */,
 				C6FEC93E1953D83400D3AB00 /* TPViewController.m */,
+				C6FEC94D195435E800D3AB00 /* TPResultDisplayTableViewController.h */,
+				C6FEC94E195435E800D3AB00 /* TPResultDisplayTableViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -301,6 +306,7 @@
 				C6FEC94C1953D85E00D3AB00 /* TPProbabilityManager.m in Sources */,
 				C6FC92E61945A21F00497983 /* main.m in Sources */,
 				C6FEC94B1953D85E00D3AB00 /* TPCardParseManager.m in Sources */,
+				C6FEC94F195435E800D3AB00 /* TPResultDisplayTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
