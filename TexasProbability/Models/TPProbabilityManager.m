@@ -98,10 +98,6 @@
     NSMutableArray *allCombineRet = [NSMutableArray array];
     NSMutableArray *combineRet = [NSMutableArray array];
     
-    NSArray *cardArray2 = [NSArray array];
-    NSMutableArray *allCombineRet2 = [NSMutableArray array];
-    NSMutableArray *combineRet2 = [NSMutableArray array];
-    
     TPCard *closeCard_1 = [TPCardParseManager sharedInstance].closeCard_1;
     TPCard *closeCard_2 = [TPCardParseManager sharedInstance].closeCard_2;
     
@@ -122,17 +118,21 @@
         [combineRet addObject:openCard_2];
         [combineRet addObject:openCard_3];
         
-        cardArray2 = [NSArray arrayWithArray:combineRet];
+        NSArray *cardArray2 = [NSArray arrayWithArray:combineRet];
+        NSMutableArray *allCombineRet2 = [NSMutableArray array];
+        NSMutableArray *combineRet2 = [NSMutableArray array];
         [self combineData:cardArray2 toArray:allCombineRet2 size:cardArray2.count count:5 startIndex:0 combineRet:combineRet2];
         
+        TPCardPower power = 0;
         for (NSMutableArray *combineRet2 in allCombineRet2) {
-            TPCardPower power = [[TPCardParseManager sharedInstance] parseCard:combineRet2];
-            [self saveParseResult:power current:NO];
+            power = power | [[TPCardParseManager sharedInstance] parseCard:combineRet2];
         }
+        
+        [self saveParseResult:power current:NO];
         
     }
     
-    [self calculatePB:allCombineRet.count * allCombineRet2.count];
+    [self calculatePB:allCombineRet.count];
     
     NSArray *currentArray = @[closeCard_1, closeCard_2, openCard_1, openCard_2, openCard_3];
     TPCardPower power = [[TPCardParseManager sharedInstance] parseCard:currentArray];
@@ -145,9 +145,7 @@
     NSMutableArray *allCombineRet = [NSMutableArray array];
     NSMutableArray *combineRet = [NSMutableArray array];
     
-    NSArray *cardArray2 = [NSArray array];
-    NSMutableArray *allCombineRet2 = [NSMutableArray array];
-    NSMutableArray *combineRet2 = [NSMutableArray array];
+    
     
     TPCard *closeCard_1 = [TPCardParseManager sharedInstance].closeCard_1;
     TPCard *closeCard_2 = [TPCardParseManager sharedInstance].closeCard_2;
@@ -171,17 +169,20 @@
         [combineRet addObject:openCard_3];
         [combineRet addObject:openCard_4];
         
-        cardArray2 = [NSArray arrayWithArray:combineRet];
+        NSArray *cardArray2 = [NSArray arrayWithArray:combineRet];
+        NSMutableArray *allCombineRet2 = [NSMutableArray array];
+        NSMutableArray *combineRet2 = [NSMutableArray array];
         [self combineData:cardArray2 toArray:allCombineRet2 size:cardArray2.count count:5 startIndex:0 combineRet:combineRet2];
         
+        TPCardPower power = 0;
         for (NSMutableArray *combineRet2 in allCombineRet2) {
-            TPCardPower power = [[TPCardParseManager sharedInstance] parseCard:combineRet2];
-            [self saveParseResult:power current:NO];
+            power = power | [[TPCardParseManager sharedInstance] parseCard:combineRet2];
         }
         
+        [self saveParseResult:power current:NO];
     }
     
-    [self calculatePB:allCombineRet.count * allCombineRet2.count];
+    [self calculatePB:allCombineRet.count];
     
     
     NSArray *currentArray = @[closeCard_1, closeCard_2, openCard_1, openCard_2, openCard_3, openCard_4];
