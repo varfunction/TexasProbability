@@ -122,7 +122,13 @@
         
         TPPlayFlow flow = [self getCurrentPlayFlow];
         if (flow != TPPlayFlow_Nothing) {
-            [[TPProbabilityManager sharedInstance] startCalculator:flow firstTime:isFirstTimeSet];
+            [TPHud showLoading:@"紧张计算中。。。"];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                [[TPProbabilityManager sharedInstance] startCalculator:flow firstTime:isFirstTimeSet];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [TPHud hide];
+                });
+            });
         }
     }
 }
@@ -140,11 +146,6 @@
     self.scrollView.hidden = YES;
     
     [[TPCardParseManager sharedInstance] clearAllCard];
-    
-    [TPHud showLoading:@"loading"];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [TPHud hide];
-    });
 }
 
 - (BOOL)isSelectedCard:(NSString *)title
@@ -224,13 +225,14 @@
 
 - (TPPlayFlow)getCurrentPlayFlow
 {
-    if ([self HasRiverValue] && [self HasTurnValue] && [self HasFlopValue] && [self HasOpenHandValue]) {
+    int count = [self selectedCardCount];
+    if (count == 7 && [self HasRiverValue] && [self HasTurnValue] && [self HasFlopValue] && [self HasOpenHandValue]) {
         return TPPlayFlow_River;
-    } else if ([self HasTurnValue] && [self HasFlopValue] && [self HasOpenHandValue]) {
+    } else if (count == 6 && [self HasTurnValue] && [self HasFlopValue] && [self HasOpenHandValue]) {
         return TPPlayFlow_Turn;
-    } else if ([self HasFlopValue] && [self HasOpenHandValue]) {
+    } else if (count == 5 && [self HasFlopValue] && [self HasOpenHandValue]) {
         return TPPlayFlow_Flop;
-    } else if ([self HasOpenHandValue]) {
+    } else if (count == 2 && [self HasOpenHandValue]) {
         return TPPlayFlow_OpenHand;
     } else {
         return TPPlayFlow_Nothing;
@@ -258,6 +260,25 @@
 {
     return ![[self.closeCard_1 titleForState:UIControlStateNormal] isEqualToString:CARD_TYPE_STR_INIT]
         && ![[self.closeCard_2 titleForState:UIControlStateNormal] isEqualToString:CARD_TYPE_STR_INIT];
+}
+
+- (int)selectedCardCount
+{
+    int count = 0;
+    
+    for (UIButton *btn in self.closedCardArray) {
+        if (![[btn titleForState:UIControlStateNormal] isEqualToString:CARD_TYPE_STR_INIT]) {
+            count++;
+        }
+    }
+    
+    for (UIButton *btn in self.openCardArray) {
+        if (![[btn titleForState:UIControlStateNormal] isEqualToString:CARD_TYPE_STR_INIT]) {
+            count++;
+        }
+    }
+    
+    return count;
 }
 
 @end

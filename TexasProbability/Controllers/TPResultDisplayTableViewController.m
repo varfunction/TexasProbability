@@ -61,15 +61,18 @@
 
 - (void)refreshNotification:(NSNotification*)sender
 {
-    TPProbabilityManager *manager = [TPProbabilityManager sharedInstance];
-    self.HJLabel.text = [NSString stringWithFormat:@"皇家：%2.2f%%", manager.HJ_PB * 100];
-    self.JGLabel.text = [NSString stringWithFormat:@"金刚：%2.2f%%", manager.JG_PB * 100];
-    self.HLLabel.text = [NSString stringWithFormat:@"葫芦：%2.2f%%", manager.HL_PB * 100];
-    self.THLabel.text = [NSString stringWithFormat:@"同花：%2.2f%%", manager.TH_PB * 100];
-    self.SZLabel.text = [NSString stringWithFormat:@"顺子：%2.2f%%", manager.SZ_PB * 100];
-    self.STLabel.text = [NSString stringWithFormat:@"三条：%2.2f%%", manager.ST_PB * 100];
-    self.LDLabel.text = [NSString stringWithFormat:@"两对：%2.2f%%", manager.LD_PB * 100];
-    self.DDLabel.text = [NSString stringWithFormat:@"单对：%2.2f%%", manager.DD_PB * 100];
+//    [TPHud hide];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        TPProbabilityManager *manager = [TPProbabilityManager sharedInstance];
+        self.HJLabel.text = [NSString stringWithFormat:@"皇家：%4.2f%%", manager.HJ_PB * 100];
+        self.JGLabel.text = [NSString stringWithFormat:@"金刚：%4.2f%%", manager.JG_PB * 100];
+        self.HLLabel.text = [NSString stringWithFormat:@"葫芦：%4.2f%%", manager.HL_PB * 100];
+        self.THLabel.text = [NSString stringWithFormat:@"同花：%4.2f%%", manager.TH_PB * 100];
+        self.SZLabel.text = [NSString stringWithFormat:@"顺子：%4.2f%%", manager.SZ_PB * 100];
+        self.STLabel.text = [NSString stringWithFormat:@"三条：%4.2f%%", manager.ST_PB * 100];
+        self.LDLabel.text = [NSString stringWithFormat:@"两对：%4.2f%%", manager.LD_PB * 100];
+        self.DDLabel.text = [NSString stringWithFormat:@"单对：%4.2f%%", manager.DD_PB * 100];
+    });
 }
 
 #pragma mark - Table view data source

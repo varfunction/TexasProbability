@@ -39,6 +39,7 @@
 
 - (TPCardPower)parseCard:(NSArray *)cardArray
 {
+    assert(cardArray.count == 5);
     int power = 0;
     NSArray *sortedCardArray = [self sortCard:cardArray];
     
