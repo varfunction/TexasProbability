@@ -140,6 +140,11 @@
     self.scrollView.hidden = YES;
     
     [[TPCardParseManager sharedInstance] clearAllCard];
+    
+    [TPHud showLoading:@"loading"];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [TPHud hide];
+    });
 }
 
 - (BOOL)isSelectedCard:(NSString *)title
