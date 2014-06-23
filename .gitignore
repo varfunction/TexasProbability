@@ -1,6 +1,5 @@
 # Xcode
 #
-.DS_Store
 build/
 *.pbxuser
 !default.pbxuser
@@ -25,3 +24,6 @@ DerivedData
 # http://guides.cocoapods.org/using/using-cocoapods.html#should-i-ignore-the-pods-directory-in-source-control
 # 我还是要track一下，因为万一pod不能用呢。。
 # Pods/
+
+# osx noise
+.DS_Store
