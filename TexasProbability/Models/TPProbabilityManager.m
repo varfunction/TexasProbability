@@ -34,15 +34,15 @@
     self.DD_TIME = 0;
     self.GP_TIME = 0;
     
-    self.HJ_PB = .0f;
-    self.JG_PB = .0f;
-    self.HL_PB = .0f;
-    self.TH_PB = .0f;
-    self.SZ_PB = .0f;
-    self.ST_PB = .0f;
-    self.LD_PB = .0f;
-    self.DD_PB = .0f;
-    self.GP_PB = .0f;
+    self.HJ_PB = 0.0f;
+    self.JG_PB = 0.0f;
+    self.HL_PB = 0.0f;
+    self.TH_PB = 0.0f;
+    self.SZ_PB = 0.0f;
+    self.ST_PB = 0.0f;
+    self.LD_PB = 0.0f;
+    self.DD_PB = 0.0f;
+    self.GP_PB = 0.0f;
 }
 
 - (void)startCalculator:(TPPlayFlow)flow firstTime:(BOOL)firstTime
@@ -53,6 +53,7 @@
         [self calculateOpenHand];
     } else if (flow == TPPlayFlow_Flop) {
         [self calculateFlop];
+//        [self calculateFinalWith:TPPlayFlow_Flop];
     } else if (flow == TPPlayFlow_Turn) {
         [self calculateTurn];
     } else if (flow == TPPlayFlow_River) {
@@ -216,6 +217,57 @@
     for (NSMutableArray *combineRet in allCombineRet) {
         TPCardPower power = [[TPCardParseManager sharedInstance] parseCard:combineRet];
         [self saveParseResult:power current:YES];
+    }
+}
+
+- (void)calculateFinalWith:(TPPlayFlow)flow
+{
+    if (flow == TPPlayFlow_Flop) {
+        NSArray *cardArray = [NSArray array];
+        NSMutableArray *allCombineRet = [NSMutableArray array];
+        NSMutableArray *combineRet = [NSMutableArray array];
+        
+        TPCard *closeCard_1 = [TPCardParseManager sharedInstance].closeCard_1;
+        TPCard *closeCard_2 = [TPCardParseManager sharedInstance].closeCard_2;
+        
+        TPCard *openCard_1 = [TPCardParseManager sharedInstance].openCard_1;
+        TPCard *openCard_2 = [TPCardParseManager sharedInstance].openCard_2;
+        TPCard *openCard_3 = [TPCardParseManager sharedInstance].openCard_3;
+        
+        cardArray = [self buildCardArrayWithout:@[closeCard_1, closeCard_2, openCard_1, openCard_2, openCard_3]];
+        
+        int count = 2;
+        [self combineData:cardArray toArray:allCombineRet size:cardArray.count count:count startIndex:0 combineRet:combineRet];
+        NSLog(@"combine:%d,%d=%d", cardArray.count, count, allCombineRet.count);
+        
+        for (NSMutableArray *combineRet in allCombineRet) {
+            [combineRet addObject:closeCard_1];
+            [combineRet addObject:closeCard_2];
+            [combineRet addObject:openCard_1];
+            [combineRet addObject:openCard_2];
+            [combineRet addObject:openCard_3];
+            
+            NSArray *cardArray2 = [NSArray arrayWithArray:combineRet];
+            NSMutableArray *allCombineRet2 = [NSMutableArray array];
+            NSMutableArray *combineRet2 = [NSMutableArray array];
+            [self combineData:cardArray2 toArray:allCombineRet2 size:cardArray2.count count:5 startIndex:0 combineRet:combineRet2];
+            
+            TPCardPower power = 0;
+            for (NSMutableArray *combineRet2 in allCombineRet2) {
+                power = power | [[TPCardParseManager sharedInstance] parseCard:combineRet2];
+            }
+            
+            [self saveParseResult:power current:NO];
+            
+        }
+        
+        [self calculatePB:allCombineRet.count];
+        
+        NSArray *currentArray = @[closeCard_1, closeCard_2, openCard_1, openCard_2, openCard_3];
+        TPCardPower power = [[TPCardParseManager sharedInstance] parseCard:currentArray];
+        [self saveParseResult:power current:YES];
+    } else if (flow == TPPlayFlow_Turn) {
+        
     }
 }
 
