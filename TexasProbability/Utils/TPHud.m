@@ -35,7 +35,6 @@ static UIWindow *hudWindow = nil;
     self.hidden = YES;
 }
 
-
 @end
 
 @implementation TPHud
@@ -48,11 +47,13 @@ static UIWindow *hudWindow = nil;
 
 + (void)showLoading:(NSString *)message
 {
-    [self hide];
-    
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[self windowForHud] animated:YES];
-    hud.removeFromSuperViewOnHide = YES;
-    hud.detailsLabelText = message;
+    [self doInMainThread:^{
+        [self hide];
+        
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[self windowForHud] animated:YES];
+        hud.removeFromSuperViewOnHide = YES;
+        hud.detailsLabelText = message;
+    }];
 }
 
 + (UIWindow *)windowForHud
@@ -63,6 +64,15 @@ static UIWindow *hudWindow = nil;
     });
     [hudWindow showWin];
     return hudWindow;
+}
+
++ (void)doInMainThread:(dispatch_block_t)block
+{
+    if (![NSThread isMainThread]) {
+        dispatch_async(dispatch_get_main_queue(), block);
+    } else {
+        block();
+    }
 }
 
 @end
